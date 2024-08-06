@@ -1,14 +1,13 @@
-import { component$ } from '@builder.io/qwik'
+import { component$ } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
   ServiceWorkerRegister,
-} from '@builder.io/qwik-city'
-import { RouterHead } from './components/router-head/router-head'
-import { isDev } from '@builder.io/qwik/build'
+} from "@builder.io/qwik-city";
+import { RouterHead } from "./components/router-head/router-head";
+import { isDev } from "@builder.io/qwik/build";
 
-import './global.css'
-import { css } from './styled-system/css'
+import "./global.css";
 
 export default component$(() => {
   /**
@@ -30,10 +29,10 @@ export default component$(() => {
         )}
         <RouterHead />
       </head>
-      <body lang="fr" class={css({ height: 'full' })}>
+      <body lang="fr" class="h-full">
         <RouterOutlet />
         {!isDev && <ServiceWorkerRegister />}
       </body>
     </QwikCityProvider>
-  )
-})
+  );
+});

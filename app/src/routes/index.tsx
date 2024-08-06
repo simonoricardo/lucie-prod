@@ -1,8 +1,5 @@
-import { component$ } from '@builder.io/qwik'
+import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik'
 import { routeLoader$, type DocumentHead } from '@builder.io/qwik-city'
-import { stack } from '~/styled-system/patterns'
-import { HStack } from '~/styled-system/jsx'
-import { css } from '~/styled-system/css'
 
 interface ImageData {
   ext: string
@@ -63,6 +60,7 @@ export const useHomePageImages = routeLoader$(async () => {
       }),
     }
   )
+
   const {
     data: {
       attributes: { images: images },
@@ -70,6 +68,9 @@ export const useHomePageImages = routeLoader$(async () => {
   } = (await res.json()) as ImageResponse
 
   return images.data
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
 })
 
 export const imageUrl = (url: string) => {
@@ -77,44 +78,49 @@ export const imageUrl = (url: string) => {
 }
 
 export default component$(() => {
+  const ANIMATION_SPEED = 400
+
   const signal = useHomePageImages()
 
   const imageUrl = (url: string) => {
     return new URL(url, import.meta.env.VITE_APP_URL).toString()
   }
 
+  const currentOffset = useSignal(0)
+
+  useVisibleTask$(({ cleanup }) => {
+    // TODO: make somewhat responsive (stop using hardcoded values)
+    // TODO: when an image is moved out of the screen, bring it back to the end so it is infinite
+    // TODO: pause when navigating away
+    const interval = setInterval(() => {
+      currentOffset.value++
+    }, ANIMATION_SPEED)
+    cleanup(() => clearInterval(interval))
+  })
+
   return (
-    <main
-      class={stack({
-        height: 'full',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        position: 'relative',
-      })}
-    >
-      <HStack class={css({ overflowX: 'scroll' })}>
+    <main class="h-full flex flex-start items-center relative overflow-hidden">
+      <div
+        class={`flex flex-shrink-0 overflow-x-scroll gap-2 scroll-smooth transition-transform ease-linear`}
+        style={{
+          transform: `translateX(-${currentOffset.value}rem)`,
+          transitionDuration: `${ANIMATION_SPEED}ms`,
+        }}
+      >
         {signal.value.map((image) => {
           const url = imageUrl(image.attributes.formats.large.url)
           return (
-            <div class={css({ width: '800px', height: '800px' })}>
+            <div class="w-[800px] h-[800px]">
               <img
                 style={{ backgroundImage: `url(${url})` }}
                 // width="800"
                 // height="800"
-                class={css({
-                  // minWidth: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  bgPosition: 'center',
-                  bgSize: 'cover',
-                  bgRepeat: 'no-repeat',
-                })}
+                class="w-full h-full object-cover bg-center bg-cover bg-no-repeat"
               />
             </div>
           )
         })}
-      </HStack>
+      </div>
     </main>
   )
 })

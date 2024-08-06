@@ -1,7 +1,9 @@
 /**
- * PandaCSS CSS layers
- * View the full documentation at https://panda-css.com/docs/concepts/cascade-layers#layer-css
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
  */
-@layer reset, base, tokens, recipes, utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
