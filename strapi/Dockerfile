@@ -17,6 +17,7 @@ RUN apt-get update -qq && \
 
 COPY --link . .
 
+RUN pnpm add @strapi/typescript-utils
 RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 
