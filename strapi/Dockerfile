@@ -16,12 +16,12 @@ RUN apt-get update -qq && \
 
 COPY --link . .
 
-RUN npm ci
-RUN npm run build
+RUN pnpm install --frozen-lockfile
+RUN pnpm run build
 
 FROM base
 
 COPY --from=build /app /app
 
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD [ "pnpm", "run", "start" ]
