@@ -25,5 +25,6 @@ FROM base
 
 COPY --from=build /app /app
 
+RUN corepack enable
 EXPOSE 3000
 CMD [ "pnpm", "run", "start" ]
