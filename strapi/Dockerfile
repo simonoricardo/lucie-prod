@@ -11,6 +11,7 @@ ENV NODE_ENV="production"
 
 FROM base as build
 
+RUN corepack enable
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
