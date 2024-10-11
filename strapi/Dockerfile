@@ -16,12 +16,12 @@ RUN apt-get update -qq && \
 
 COPY --link . .
 
-RUN pnpm install --immutable
-RUN pnpm run build
+RUN npm ci
+RUN npm run build
 
 FROM base
 
 COPY --from=build /app /app
 
 EXPOSE 3000
-CMD [ "pnpm", "run", "start" ]
+CMD [ "npm", "run", "start" ]
