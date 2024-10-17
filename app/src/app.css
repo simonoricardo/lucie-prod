@@ -1,0 +1,68 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+	@font-face {
+		font-family: Carattere;
+		font-weight: 400;
+		src: url(/fonts/Carattere.ttf);
+	}
+
+	@font-face {
+		font-family: Kalam;
+		font-weight: 400;
+		src: url(/fonts/Kalam-Regular.ttf);
+	}
+
+	@font-face {
+		font-family: Kalam;
+		font-weight: 700;
+		src: url(/fonts/Kalam-Bold.ttf);
+	}
+
+	@font-face {
+		font-family: Kalam;
+		font-weight: 300;
+		src: url(/fonts/Kalam-Light.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 400;
+		src: url(/fonts/Lato-Regular.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 700;
+		src: url(/fonts/Lato-Bold.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 300;
+		src: url(/fonts/Lato-Light.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 400;
+		font-style: italic;
+		src: url(/fonts/Lato-Italic.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 700;
+		font-style: italic;
+		src: url(/fonts/Lato-BoldItalic.ttf);
+	}
+
+	@font-face {
+		font-family: Lato;
+		font-weight: 300;
+		font-style: italic;
+		src: url(/fonts/Lato-LightItalic.ttf);
+	}
+}

@@ -1,0 +1,4 @@
+[env]
+VITE_API_TOKEN = 'a273ff59e27ab1cd67dd3af982bfdcfe3777ac03a9bca3627433e079323f192b135548c4a46a97614fd7a6202f325544af0286017dc9bfa632993c910b6114881521ebaf04e0c55b4e087b134bd907d9800b9fc6515dc3c24953cbb90b4357170c80d89a89ee196e2e235464b2488508b60f6b635f7cc46ea27c3abc0a05fc0c'
+VITE_API_BASE_URL = 'https://lucie-production.up.railway.app/api/'
+VITE_APP_URL = 'https://lucie-production.up.railway.app'
