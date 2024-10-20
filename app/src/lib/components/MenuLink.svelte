@@ -3,14 +3,21 @@
 
 	interface Props {
 		to: string
+		isMain?: boolean
+		current: boolean
 		children: Snippet
 	}
 
-	let { to, children }: Props = $props()
+	let { to, isMain = false, current, children }: Props = $props()
 </script>
 
 <li>
-	<a href={to} class="blob-btn font-serif text-xl">
+	<a
+		href={to}
+		class="blob-btn rounded-2xl font-serif {isMain ? 'text-xl' : 'text-md'} {current
+			? 'bg-slate-600 text-slate-300'
+			: 'bg-transparent text-slate-800'}"
+	>
 		{@render children()}
 		<span class="blob-btn__inner">
 			<span class="blob-btn__blobs">
@@ -37,8 +44,6 @@
 		padding: 1.5rem 2rem;
 		text-align: center;
 		text-transform: uppercase;
-		color: #1e293b;
-		background-color: transparent;
 		transition: color 0.5s;
 	}
 

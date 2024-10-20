@@ -50,7 +50,7 @@ export interface ImageAttributes {
 	updatedAt: string
 }
 
-export const load: PageServerLoad = async ({}) => {
+export const load: PageServerLoad = async ({ setHeaders }) => {
 	const res = await fetch(
 		`${import.meta.env.VITE_API_BASE_URL}home-pages/sy5lxxc41nsju2of5oc9mxz3?populate=*`,
 		{
@@ -59,6 +59,10 @@ export const load: PageServerLoad = async ({}) => {
 			})
 		}
 	)
+
+	setHeaders({
+		'Cache-Control': 'no-store'
+	})
 
 	const response = await res.json()
 
