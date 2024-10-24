@@ -7,6 +7,7 @@
 	import MainMenu from '$lib/components/MainMenu.svelte'
 	import Transitionable from '$lib/components/Transitionable.svelte'
 	import { navigating } from '$app/stores'
+	import { imageUrl } from '$lib/helpers'
 
 	interface Props {
 		data: {
@@ -25,15 +26,6 @@
 			autoplay = true
 		}
 	})
-
-	// $effect(() => {
-	// 	if (navigating) {
-	// 	}
-	// })
-
-	const imageUrl = (url: string) => {
-		return new URL(url, import.meta.env.VITE_APP_URL).toString()
-	}
 </script>
 
 <svelte:head>

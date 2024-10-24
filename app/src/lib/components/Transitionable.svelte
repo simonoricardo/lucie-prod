@@ -22,12 +22,19 @@
 		alt?: string
 		transitionId?: string
 		children: Snippet
+		getDimensions?: Function
 	}
 
-	let { src, className, alt = '', transitionId, children }: Props = $props()
+	let { src, className, alt = '', transitionId, children, getDimensions }: Props = $props()
+	let width = $state()
+	let height = $state()
+
+	$effect(() => {
+		getDimensions?.({ width, height })
+	})
 </script>
 
-<div class={`relative ${className}`}>
+<div class={`relative ${className}`} bind:clientWidth={width} bind:clientHeight={height}>
 	<div
 		class="absolute h-full w-full overflow-hidden"
 		out:send={{ key: transitionId }}

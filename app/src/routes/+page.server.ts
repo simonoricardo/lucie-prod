@@ -60,20 +60,22 @@ export const load: PageServerLoad = async ({ setHeaders }) => {
 		}
 	)
 
-	setHeaders({
-		'Cache-Control': 'no-store'
-	})
-
 	const response = await res.json()
 
 	const {
 		data: { images }
 	} = response as ImageResponse
 
+	console.log(images)
+
 	const transformedImages = images
 		.map((value) => ({ value, sort: Math.random() }))
 		.sort((a, b) => a.sort - b.sort)
 		.map(({ value }) => value)
+
+	setHeaders({
+		'Cache-Control': 'no-store'
+	})
 
 	return {
 		images: transformedImages
