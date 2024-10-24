@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MainMenu from '$lib/components/MainMenu.svelte'
 	import Transitionable from '$lib/components/Transitionable.svelte'
-	import { fade } from 'svelte/transition'
+	import { fade, scale } from 'svelte/transition'
 	import { imageUrl, cssStringify } from '$lib/helpers'
 
 	let { data } = $props()
@@ -56,20 +56,24 @@
 	out:fade={{ duration: 10 }}
 >
 	<div
-		class="grid h-full w-full grid-flow-dense grid-cols-[repeat(auto-fill,minmax(260px,1fr))] grid-rows-[repeat(auto-fit,260px)] gap-2 p-4"
+		class="grid h-full w-full grid-flow-dense grid-cols-[repeat(auto-fill,minmax(260px,1fr))] grid-rows-[repeat(auto-fit,260px)] gap-4 p-4"
 	>
 		{#each data.imagesData as imageData (imageData.id)}
 			<a
 				href="oeuvres/{imageData.documentId}"
 				style={imageGridStyle(imageData.image.formats.medium)}
+				class="group relative overflow-hidden transition-transform"
 			>
-				<Transitionable className="h-full w-full" transitionId={imageData.documentId}>
-					<img
-						src={imageUrl(imageData.image.formats.medium.url)}
-						class="h-full w-full rounded-xl object-cover"
-						alt="a painting"
-					/>
-				</Transitionable>
+				<img
+					src={imageUrl(imageData.image.formats.medium.url)}
+					class="h-full w-full rounded-xl object-cover transition-shadow group-hover:shadow-lg"
+					alt="a painting"
+				/>
+				<p
+					class="absolute bottom-0 w-full translate-y-160 rounded-lg bg-gray-900/35 p-4 pb-24 text-white backdrop-blur-md transition-transform group-hover:-translate-y-0"
+				>
+					Some more information
+				</p>
 			</a>
 		{/each}
 	</div>
