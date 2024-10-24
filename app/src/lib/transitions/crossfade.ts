@@ -57,11 +57,6 @@ export function crossfade({
 		const dh = target.height - from.height
 		const d = Math.sqrt(dx * dx + dy * dy)
 
-		if (!inTransition) {
-			console.log('FROM', from)
-			console.log('TO', target)
-		}
-
 		const style = getComputedStyle(node)
 		const transform = style.transform === 'none' ? '' : style.transform
 

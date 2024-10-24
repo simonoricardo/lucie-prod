@@ -17,7 +17,6 @@
 
 <script lang="ts">
 	interface Props {
-		src?: string
 		className?: string
 		alt?: string
 		transitionId?: string
@@ -25,7 +24,7 @@
 		getDimensions?: Function
 	}
 
-	let { src, className, alt = '', transitionId, children, getDimensions }: Props = $props()
+	let { className, transitionId, children, getDimensions }: Props = $props()
 	let width = $state()
 	let height = $state()
 

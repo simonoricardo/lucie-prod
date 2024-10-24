@@ -38,6 +38,12 @@
 	}
 </script>
 
+<svelte:head>
+	{#each data.imagesData as imageData (imageData.documentId)}
+		<link rel="preload" href={imageUrl(imageData.image.formats.medium.url)} as="image" />
+	{/each}
+</svelte:head>
+
 <div class="absolute left-0 top-0 m-auto h-full w-[75%] backdrop-blur-xl md:m-0 md:w-80">
 	<Transitionable className="h-full" {getDimensions}>
 		<MainMenu />
@@ -46,21 +52,25 @@
 <div
 	class="ml-auto overflow-scroll"
 	style="width: calc(100% - {menuDimensions.width}px"
-	in:fade={{ delay: 500 }}
-	out:fade
+	in:fade={{ delay: 1000 }}
+	out:fade={{ duration: 10 }}
 >
 	<div
 		class="grid h-full w-full grid-flow-dense grid-cols-[repeat(auto-fill,minmax(260px,1fr))] grid-rows-[repeat(auto-fit,260px)] gap-2 p-4"
 	>
 		{#each data.imagesData as imageData (imageData.id)}
-			<img
-				src={imageUrl(imageData.image.formats.medium.url)}
+			<a
+				href="oeuvres/{imageData.documentId}"
 				style={imageGridStyle(imageData.image.formats.medium)}
-				width={imageData.image.formats.medium.width}
-				height={imageData.image.formats.medium.height}
-				class="object-fit h-full w-full min-w-0 rounded-xl object-cover"
-				alt="a painting"
-			/>
+			>
+				<Transitionable className="h-full w-full" transitionId={imageData.documentId}>
+					<img
+						src={imageUrl(imageData.image.formats.medium.url)}
+						class="h-full w-full rounded-xl object-cover"
+						alt="a painting"
+					/>
+				</Transitionable>
+			</a>
 		{/each}
 	</div>
 </div>

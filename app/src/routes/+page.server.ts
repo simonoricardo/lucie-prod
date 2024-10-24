@@ -66,8 +66,6 @@ export const load: PageServerLoad = async ({ setHeaders }) => {
 		data: { images }
 	} = response as ImageResponse
 
-	console.log(images)
-
 	const transformedImages = images
 		.map((value) => ({ value, sort: Math.random() }))
 		.sort((a, b) => a.sort - b.sort)
